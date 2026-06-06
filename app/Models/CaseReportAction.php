@@ -27,7 +27,7 @@ class CaseReportAction extends Model
 
     public function caseReport(): BelongsTo
     {
-        return $this->belongsTo(CaseReport::class);
+        return $this->belongsTo(CaseReport::class)->withTrashed();
     }
 
     public function author(): BelongsTo

@@ -213,10 +213,18 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 @foreach($actions as $action)
+                                    @php
+                                        $caseReport = $action->caseReport;
+                                        $barangayName = $caseReport?->barangay?->name ?? 'Unavailable barangay';
+                                        $healthCategoryName = $caseReport?->healthCategory?->name ?? 'Unavailable disease';
+                                    @endphp
                                     <tr>
                                         <x-table.cell>
-                                            <p class="text-sm font-semibold text-gray-900">{{ $action->caseReport->barangay->name }}</p>
-                                            <p class="text-xs text-gray-600">{{ $action->caseReport->healthCategory->name }}</p>
+                                            <p class="text-sm font-semibold text-gray-900">{{ $barangayName }}</p>
+                                            <p class="text-xs text-gray-600">{{ $healthCategoryName }}</p>
+                                            @if($caseReport?->trashed())
+                                                <p class="text-xs text-gray-500 mt-1">Original report deleted</p>
+                                            @endif
                                         </x-table.cell>
                                         <x-table.cell>
                                             <p class="text-sm font-semibold text-gray-800">{{ $actionLabels[$action->action_type] ?? ucfirst(str_replace('_', ' ', $action->action_type)) }}</p>
