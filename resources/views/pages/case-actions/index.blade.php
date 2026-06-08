@@ -4,17 +4,16 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
                 <h2 class="font-semibold text-xl text-gray-900 leading-tight">Case Coordination</h2>
-                <p class="text-sm text-gray-500 mt-1">RHU actions, admin oversight, and citizen-visible guidance by barangay and disease.</p>
+                <p class="text-sm text-gray-500 mt-1">RHU actions and citizen-visible guidance by barangay and disease.</p>
             </div>
-            <x-ui.badge :status="auth()->user()->isAdmin() ? 'Admin' : 'RHU'" />
+            <x-ui.badge status="RHU" />
         </div>
     </x-slot>
 
     @php
-        $isAdmin = auth()->user()->isAdmin();
-        $storeRoute = $isAdmin ? route('admin.case-actions.store') : route('rhu.case-actions.store');
-        $completeRouteName = $isAdmin ? 'admin.case-actions.complete' : 'rhu.case-actions.complete';
-        $indexRoute = $isAdmin ? route('admin.case-actions.index') : route('rhu.case-actions.index');
+        $storeRoute = route('rhu.case-actions.store');
+        $completeRouteName = 'rhu.case-actions.complete';
+        $indexRoute = route('rhu.case-actions.index');
         $actionLabels = [
             'field_visit' => 'Field visit',
             'health_education' => 'Health education',

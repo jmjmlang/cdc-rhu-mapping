@@ -97,6 +97,13 @@ Living log of bugs, root causes, fixes, and prevention rules. Read before featur
 - Fix: Approve/seed current reports and use `now()->subDays(30)->toDateString()`.
 - Prevention Rule: Test with approved current data.
 
+### Soft-Deleted Reports Hide Coordination Relations
+- Encountered: 2026-06-06.
+- Symptom: Case coordination page returned 500 with `Attempt to read property "barangay" on null`.
+- Root Cause: `CaseReport` uses soft deletes, so `CaseReportAction::caseReport()` returned `null` for actions linked to soft-deleted reports even though `case_report_id` still pointed to an existing row.
+- Fix: Load trashed reports through the action relationship and keep Blade relation output null-safe.
+- Prevention Rule: For audit/coordination records that must survive report deletion, use `withTrashed()` on parent relations and null-safe display fallbacks.
+
 ## DSS
 
 ### DSS Empty

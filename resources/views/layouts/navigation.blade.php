@@ -74,11 +74,6 @@
                 Reports
             </x-nav-link>
 
-            <x-nav-link :href="route('admin.case-actions.index')" :active="request()->routeIs('admin.case-actions.*')">
-                <x-ui.icon name="clipboard-document-list" class="w-5 h-5 shrink-0" />
-                Case Coordination
-            </x-nav-link>
-
             <x-nav-link :href="route('admin.health-categories.index')" :active="request()->routeIs('admin.health-categories.*')">
                 <x-ui.icon name="tag" class="w-5 h-5 shrink-0" />
                 Categories

@@ -16,7 +16,7 @@ class CaseReportActionController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
-        abort_if(! $user || (! $user->isAdmin() && ! $user->isRhu()), 403);
+        abort_if(! $user || ! $user->isRhu(), 403);
 
         $status = $request->query('status', 'open');
         $allowedStatuses = ['open', 'completed', 'all'];
@@ -70,7 +70,7 @@ class CaseReportActionController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $user = $request->user();
-        abort_if(! $user || (! $user->isAdmin() && ! $user->isRhu()), 403);
+        abort_if(! $user || ! $user->isRhu(), 403);
 
         $validated = $request->validate([
             'barangay_id'        => ['required', 'exists:barangays,id'],
@@ -106,7 +106,7 @@ class CaseReportActionController extends Controller
     public function complete(Request $request, CaseReportAction $caseAction): RedirectResponse
     {
         $user = $request->user();
-        abort_if(! $user || (! $user->isAdmin() && ! $user->isRhu()), 403);
+        abort_if(! $user || ! $user->isRhu(), 403);
 
         if ($caseAction->status === 'completed') {
             return back()->with('error', 'This action is already completed.');

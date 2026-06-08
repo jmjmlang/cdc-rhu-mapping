@@ -63,10 +63,6 @@ Route::middleware(['auth', 'role:admin', 'prevent-back-history'])->prefix('admin
     Route::patch('/users/{user}',           [UserApprovalController::class, 'update'])->name('users.update');
 
     Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log.index');
-
-    Route::get('/case-coordination', [CaseReportActionController::class, 'index'])->name('case-actions.index');
-    Route::post('/case-coordination', [CaseReportActionController::class, 'store'])->name('case-actions.store');
-    Route::patch('/case-coordination/{caseAction}/complete', [CaseReportActionController::class, 'complete'])->name('case-actions.complete');
 });
 
 // ── RHU (Rural Health Unit) actions ──────────────────────────────
